@@ -15,7 +15,6 @@
 # DEPENDENCIES:
 #   gem: sensu-plugin
 #   gem: rest-client
-#   gem: rubysl-resolv
 #
 # USAGE:
 #   #YELLOW
@@ -32,6 +31,9 @@ require 'sensu-plugin/check/cli'
 require 'rest-client'
 require 'resolv'
 
+#
+# Consul Status
+#
 class ConsulStatus < Sensu::Plugin::Check::CLI
   option :server,
          description: 'consul server',

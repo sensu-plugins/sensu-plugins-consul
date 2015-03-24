@@ -9,6 +9,7 @@
 
 ## Files
  * bin/check-consul
+ * bin/check-service-consul
 
 ## Usage
 
