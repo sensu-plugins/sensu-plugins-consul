@@ -51,9 +51,3 @@ end
 ```
 
 ## Notes
-
-[1]:[https://travis-ci.org/sensu-plugins/sensu-plugins-consul]
-[2]:[http://badge.fury.io/rb/sensu-plugins-consul]
-[3]:[https://codeclimate.com/github/sensu-plugins/sensu-plugins-consul]
-[4]:[https://codeclimate.com/github/sensu-plugins/sensu-plugins-consul]
-[5]:[https://gemnasium.com/sensu-plugins/sensu-plugins-consul]

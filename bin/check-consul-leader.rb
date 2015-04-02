@@ -70,7 +70,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
     end
   end
 
-  def run
+  def run # rubocop:disable all
     r = RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v1/status/leader", timeout: 5).get
     if r.code == 200
       if valid_ip(strip_ip(r.body))
