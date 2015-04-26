@@ -1,14 +1,11 @@
-#### 0.0.1.alpha.1
+#Change Log
+This project adheres to [Semantic Versioning](http://semver.org/).
 
-* initial code from community-repo
+This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
-#### 0.0.1.alpha.2
+## Unreleased][unreleased]
 
-* add check to get consul checks status of a service
-* add check to get all consul checks in a non-passing state
+## 0.0.1 - 2015-04-21
 
-#### 0.0.1.alpha.3
-
-* add gem metadat
-* add chef provisioner to Vagrantfile
-* fix rubocop issues
+### Added
+- initial release
