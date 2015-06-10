@@ -45,7 +45,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
       if !failing_nodes.nil? && !failing_nodes.empty?
         failing_nodes.each_entry do |node|
           puts "Name: #{node['Name']}"
-          RestClient::Resource.new("http://#config[:server]:#config[:port]/v1/agent/force-leave/#node['Name']", timeout: 5).get
+          RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v1/agent/force-leave/#{node['Name']}", timeout: 5).get
         end
         ok 'Removed failed consul nodes'
       else
