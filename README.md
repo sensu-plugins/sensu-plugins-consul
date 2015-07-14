@@ -9,8 +9,11 @@
 [![Codeship Status for sensu-plugins/sensu-plugins-consul](https://codeship.com/projects/c01130b0-cddd-0132-9d10-36838894891f/status?branch=master)](https://codeship.com/projects/76354)
 
 ## Files
- * bin/check-consul.rb
+ * bin/check-consul-failures.rb
+ * bin/check-consul-leader.rb
+ * bin/check-consul-servers.rb
  * bin/check-service-consul.rb
+
 
 ## Usage
 
