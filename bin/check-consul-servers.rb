@@ -62,9 +62,9 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
   def run
     json = RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v1/status/peers", timeout: 5).get
     peers = JSON.parse(json).length.to_i
-    if peers <= config[:min]
+    if peers < config[:min].to_i
       critical "[#{peers}] peers is below critical threshold of [#{config[:min]}]"
-    elsif peers != config[:expected]
+    elsif peers != config[:expected].to_i
       warning "[#{peers}] peers is outside of expected count of [#{config[:expected]}]"
     else
       ok 'Peers within threshold'
