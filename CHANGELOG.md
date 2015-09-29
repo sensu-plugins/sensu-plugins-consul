@@ -3,7 +3,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
-## Unreleased
+## [Unreleased]
+- Nothing
+
+## [0.0.6] - 2015-09-29
+### Changed
+- Bug fixes for check-consul-servers.rb
 
 ## [0.0.5] - 2015-09-28
 ### Added
