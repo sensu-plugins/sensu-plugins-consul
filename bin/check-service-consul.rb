@@ -60,16 +60,25 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
   #
   def run
     data = acquire_service_data
-    message = []
+    passing = []
+    failing = []
     data.each do |d|
-      message << {
+      passing << {
         'node' => d['Node'],
         'service' => d['ServiceName'],
         'service_id' => d['ServiceID'],
         'notes' => d['Notes']
-      } unless d['Status'] == 'passing'
+      } if d['Status'] == 'passing'
+      failing << {
+        'node' => d['Node'],
+        'service' => d['ServiceName'],
+        'service_id' => d['ServiceID'],
+        'notes' => d['Notes']
+      } if d['Status'] == 'failing'
     end
-    critical message unless message == '[]'
-    ok
+    unknown "Could not find service - are there checks defined?" if failing.empty? and passing.empty?
+    critical message unless failing.empty?
+    ok unless passing.empty?
   end
+
 end
