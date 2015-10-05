@@ -77,8 +77,8 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
       } if d['Status'] == 'failing'
     end
     unknown "Could not find service - are there checks defined?" if failing.empty? and passing.empty?
-    critical message unless failing.empty?
-    ok unless passing.empty?
+    critical failing unless failing.empty?
+    ok passing unless passing.empty?
   end
 
 end
