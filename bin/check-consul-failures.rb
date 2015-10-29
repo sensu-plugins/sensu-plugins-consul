@@ -57,5 +57,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
       critical 'Consul is not responding'
     rescue RestClient::RequestTimeout
       critical 'Consul Connection timed out'
+    rescue RestClient::Exception => e
+      unknown "Consul returned: #{e}"
   end
 end
