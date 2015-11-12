@@ -15,7 +15,6 @@
  * bin/check-consul-servers.rb
  * bin/check-service-consul.rb
 
-
 ## Usage
 
 ## Installation

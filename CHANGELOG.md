@@ -6,6 +6,13 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ## [Unreleased]
 - Nothing
 
+## [0.0.7] - 2015-11-12
+### Changed
+- Consul checks with UNKNOWN status should fail gracefully
+
+### Fixed
+- Consul service check fixes
+
 ## [0.0.6] - 2015-09-29
 ### Changed
 - Bug fixes for check-consul-servers.rb
