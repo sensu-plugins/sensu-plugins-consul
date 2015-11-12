@@ -49,10 +49,16 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
   # Get the check data for the service from consul
   #
   def acquire_service_data
-    if config[:all]
-      Diplomat::Health.checks
-    else
-      Diplomat::Health.checks(config[:service])
+    begin
+      if config[:all]
+        Diplomat::Health.checks
+      else
+        Diplomat::Health.checks(config[:service])
+      end
+    rescue Faraday::ConnectionFailed => e
+      warning "Connection error occurred: #{e}"
+    rescue StandardError => e
+      unknown "Exception occurred when checking consul service: #{e}"
     end
   end
 
