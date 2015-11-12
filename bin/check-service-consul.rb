@@ -54,6 +54,10 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
     else
       Diplomat::Health.checks(config[:service])
     end
+  rescue Faraday::ConnectionFailed => e
+    warning "Connection error occurred: #{e}"
+  rescue StandardError => e
+    unknown "Exception occurred when checking consul service: #{e}"
   end
 
   # Main function
