@@ -13,6 +13,7 @@
  * bin/check-consul-failures.rb
  * bin/check-consul-leader.rb
  * bin/check-consul-servers.rb
+ * bin/check-consul-members.rb
  * bin/check-service-consul.rb
 
 ## Usage

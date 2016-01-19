@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-- Nothing
+- Added check to alert on consul cluster members, supports querying wan members @aianchici
 
 ## [0.0.7] - 2015-11-12
 ### Changed
