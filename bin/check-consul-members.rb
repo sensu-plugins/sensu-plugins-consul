@@ -76,7 +76,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
     members = JSON.parse(json)
     members.each do |member|
       # only count the member if its status is alive
-      if member['Status'] == 1
+      if member.key?('Tags') && member['Tags']['role'] == 'consul' && member['Status'] == 1
         peers += 1
       end
     end
