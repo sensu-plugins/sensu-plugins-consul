@@ -63,7 +63,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
     ipv6_regex = '\[.*\]'
     if str =~ /^.*#{ipv4_regex}.*$/
       return str.match(/#{ipv4_regex}/)
-    elsif str =~ /^.*#{ipv6_regex}.*$/
+    elsif str =~ /^.*#{ipv6_regex}.*$/ # rubocop:disable Style/GuardClause
       return str[/#{ipv6_regex}/][1..-2]
     else
       return str
