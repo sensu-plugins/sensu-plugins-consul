@@ -32,15 +32,22 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Fixed
 - Added check to support removing of failed consul nodes from the cluster
 
-## 0.0.1 - 2015-05-21
-
-### Added
-- initial release
-
-## 0.0.2 - 2015-06-02
-
+## [0.0.2] - 2015-06-02
 ### Fixed
 - added binstubs
 
 ### Changed
 - removed cruft from /lib
+
+## [0.0.1] - 2015-05-21
+
+### Added
+- initial release
+
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.7...HEAD
+[0.0.4]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.6...0.0.7
+[0.0.4]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.5...0.0.6
+[0.0.4]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.4...0.0.5
+[0.0.4]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.3...0.0.4
+[0.0.3]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.2...0.0.3
+[0.0.2]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.1...0.0.2
