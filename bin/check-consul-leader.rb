@@ -61,7 +61,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
   def strip_ip(str)
     ipv4_regex = '(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])'
     ipv6_regex = '\[.*\]'
-    if str =~ /^.*#{ipv4_regex}.*$/# rubocop:disable Style/GuardClause
+    if str =~ /^.*#{ipv4_regex}.*$/ # rubocop:disable Style/GuardClause
       return str.match(/#{ipv4_regex}/)
     elsif str =~ /^.*#{ipv6_regex}.*$/
       return str[/#{ipv6_regex}/][1..-2]
