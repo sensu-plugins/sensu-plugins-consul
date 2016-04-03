@@ -15,10 +15,12 @@
 #
 # DEPENDENCIES:
 #   gem: sensu-plugin
-#   gem: diplomat
+#   gem: rest-client
+#   gem: json
 #
 # USAGE:
-#   #YELLOW
+#   Check to make sure the min number of peers needed is present in the cluster
+#   ./check-consul-members -s 127.0.0.1 -p 8500 -g 5 -e 8
 #
 # NOTES:
 #

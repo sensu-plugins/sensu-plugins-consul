@@ -3,12 +3,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
+## [Unreleased]
+- Nothing
+
 ## [0.0.8] - 2016-04-03
 ### Added
 - check-consul-service-health will check the health of a specific service (Yieldbot)
 - check-consul-kv-ttl will check Consul KV namespace for timed out global operations (Yieldbot)
-
-## [Unreleased]
 - Added check to alert on consul cluster members, supports querying wan members @aianchici
 
 ## [0.0.7] - 2015-11-12
