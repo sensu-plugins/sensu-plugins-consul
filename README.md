@@ -9,6 +9,8 @@
 ## Functionality
 
 ## Files
+ * bin/check-consul-kv-ttl.rb
+ * bin/check-consul-service-health.rb
  * bin/check-consul-failures.rb
  * bin/check-consul-leader.rb
  * bin/check-consul-servers.rb
