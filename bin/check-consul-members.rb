@@ -1,10 +1,11 @@
 #! /usr/bin/env ruby
 #
-#   check-consul-servers
+#   check-consul-members
 #
 # DESCRIPTION:
 #   This plugin checks if consul is up and reachable. It then checks
-#   the number of peers matches the excepted value
+#   the status of the members of the cluster to determine if the correct
+#   number of peers are reporting as 'alive'
 #
 # OUTPUT:
 #   plain text
@@ -59,9 +60,27 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--expect EXPECT',
          default: 5
 
+  option :wan,
+         description: 'whether to check the wan members',
+         short: '-w',
+         long: '--wan',
+         boolean: false
+
   def run
-    json = RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v1/status/peers", timeout: 5).get
-    peers = JSON.parse(json).length.to_i
+    url = "http://#{config[:server]}:#{config[:port]}/v1/agent/members"
+    if config[:wan]
+      url += '?wan=1'
+    end
+    json = RestClient::Resource.new(url, timeout: 5).get
+    peers = 0
+    members = JSON.parse(json)
+    members.each do |member|
+      # only count the member if its status is alive
+      if member.key?('Tags') && member['Tags']['role'] == 'consul' && member['Status'] == 1
+        peers += 1
+      end
+    end
+
     if peers < config[:min].to_i
       critical "[#{peers}] peers is below critical threshold of [#{config[:min]}]"
     elsif peers != config[:expected].to_i

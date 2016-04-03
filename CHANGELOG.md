@@ -9,7 +9,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 - check-consul-kv-ttl will check Consul KV namespace for timed out global operations (Yieldbot)
 
 ## [Unreleased]
-- Nothing
+- Added check to alert on consul cluster members, supports querying wan members @aianchici
 
 ## [0.0.7] - 2015-11-12
 ### Changed
