@@ -56,9 +56,7 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
   # Get the service checks for the given service
   def acquire_service_data
     if config[:all]
-      Diplomat::Service.get_all.to_h.keys.each do |service|
-        Diplomat::Health.checks(service)
-      end
+      Diplomat::Health.state('any')
     else
       Diplomat::Health.checks(config[:service])
     end
