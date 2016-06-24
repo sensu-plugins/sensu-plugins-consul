@@ -4,7 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-- Nothing
+- Fixed check-consul-service-health and check-service-consul --all argument @wg-tsuereth
+- check-consul-service-health and check-service-consul now accept a --consul argument to specify a server @wg-tsuereth
 
 ## [0.0.8] - 2016-04-03
 ### Added
