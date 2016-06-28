@@ -35,6 +35,11 @@ require 'diplomat'
 # Service Status
 #
 class ServiceStatus < Sensu::Plugin::Check::CLI
+  option :consul,
+         description: 'consul server',
+         long: '--consul SERVER',
+         default: 'http://localhost:8500'
+
   option :service,
          description: 'a service managed by consul',
          short: '-s SERVICE',
@@ -50,7 +55,7 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
   #
   def acquire_service_data
     if config[:all]
-      Diplomat::Health.checks
+      Diplomat::Health.state('any')
     else
       Diplomat::Health.checks(config[:service])
     end
@@ -63,6 +68,10 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
   # Main function
   #
   def run
+    Diplomat.configure do |dc|
+      dc.url = config[:consul]
+    end
+
     data = acquire_service_data
     passing = []
     failing = []

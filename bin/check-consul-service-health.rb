@@ -37,6 +37,11 @@ require 'json'
 # Service Status
 #
 class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
+  option :consul,
+         description: 'consul server',
+         long: '--consul SERVER',
+         default: 'http://localhost:8500'
+
   option :service,
          description: 'a service managed by consul',
          short: '-s SERVICE',
@@ -51,7 +56,7 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
   # Get the service checks for the given service
   def acquire_service_data
     if config[:all]
-      Diplomat::Health.checks
+      Diplomat::Health.state('any')
     else
       Diplomat::Health.checks(config[:service])
     end
@@ -59,6 +64,10 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
 
   # Do work
   def run
+    Diplomat.configure do |dc|
+      dc.url = config[:consul]
+    end
+
     warnings   = false
     criticals  = false
     checks     = {}
