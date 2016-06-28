@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [1.0.0] - 2016-06-28
 ### Fixed
 - Fixed check-consul-service-health and check-service-consul --all argument @wg-tsuereth
 
@@ -58,7 +60,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.1.7...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.1.7...1.0.0
 [0.1.7]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.7...0.1.7
 [0.0.7]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.6...0.0.7
 [0.0.6]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.5...0.0.6
