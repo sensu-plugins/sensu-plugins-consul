@@ -14,7 +14,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Removed
 - Support for Ruby 1.9.3
 
-## [0.0.8] - 2016-04-03
+## [0.1.7] - 2016-04-03
 ### Added
 - check-consul-service-health will check the health of a specific service (Yieldbot)
 - check-consul-kv-ttl will check Consul KV namespace for timed out global operations (Yieldbot)
@@ -58,8 +58,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.8...HEAD
-[0.0.8]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.7...0.0.8
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.1.7...HEAD
+[0.1.7]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.7...0.1.7
 [0.0.7]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.6...0.0.7
 [0.0.6]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.5...0.0.6
 [0.0.5]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/0.0.4...0.0.5
