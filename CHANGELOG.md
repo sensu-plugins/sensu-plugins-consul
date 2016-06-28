@@ -9,6 +9,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ### Added
 - check-consul-service-health and check-service-consul now accept a --consul argument to specify a server @wg-tsuereth
+- Support for Ruby 2.3.0
+
+### Removed
+- Support for Ruby 1.9.3
 
 ## [0.0.8] - 2016-04-03
 ### Added
