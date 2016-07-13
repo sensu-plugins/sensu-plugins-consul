@@ -96,7 +96,7 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
     end
 
     if failing.empty? && passing.empty?
-      msg = "Could not find checks for any services"
+      msg = 'Could not find checks for any services'
       if config[:service]
         msg = "Could not find checks for service #{config[:service]}"
       end
