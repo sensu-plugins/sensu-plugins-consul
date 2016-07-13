@@ -51,6 +51,11 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
          short: '-a',
          long: '--all'
 
+  option :fail_if_not_found,
+         description: 'fail if no service is found',
+         short: '-f',
+         long: '--fail-if-not-found'
+
   # Get the check data for the service from consul
   #
   def acquire_service_data
@@ -89,7 +94,18 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
         'notes' => d['Notes']
       } if d['Status'] == 'failing'
     end
-    unknown 'Could not find service - are there checks defined?' if failing.empty? && passing.empty?
+
+    if failing.empty? && passing.empty?
+      msg = "Could not find checks for any services"
+      if config[:service]
+        msg = "Could not find checks for service #{config[:service]}"
+      end
+      if config[:fail_if_not_found]
+        critical msg
+      else
+        unknown msg
+      end
+    end
     critical failing unless failing.empty?
     ok passing unless passing.empty?
   end
