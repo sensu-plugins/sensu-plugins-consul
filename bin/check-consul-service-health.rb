@@ -53,6 +53,11 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
          short: '-a',
          long: '--all'
 
+  option :fail_if_not_found,
+         description: 'fail if no service is found',
+         short: '-f',
+         long: '--fail-if-not-found'
+
   # Get the service checks for the given service
   def acquire_service_data
     if config[:all]
@@ -68,12 +73,14 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
       dc.url = config[:consul]
     end
 
+    found      = false
     warnings   = false
     criticals  = false
     checks     = {}
 
     # Process all of the nonpassing service checks
     acquire_service_data.each do |d|
+      found       = true
       checkId     = d['CheckID'] # rubocop:disable Style/VariableName
       checkStatus = d['Status'] # rubocop:disable Style/VariableName
 
@@ -86,6 +93,13 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
       criticals = true  if %w(critical unknown).include? checkStatus
     end
 
+    if config[:fail_if_not_found] && !found
+      msg = 'Could not find checks for any services'
+      if config[:service]
+        msg = "Could not find checks for service #{config[:service]}"
+      end
+      critical msg
+    end
     critical checks if criticals
     warning checks  if warnings
     ok
