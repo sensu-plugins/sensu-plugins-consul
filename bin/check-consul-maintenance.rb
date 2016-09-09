@@ -51,10 +51,10 @@ class MaintenanceStatus < Sensu::Plugin::Check::CLI
     result = Diplomat::Health.node(config[:node]).select do |check|
       check['CheckID'] == '_node_maintenance'
     end
-    if result.size > 0
-      { :enabled => true, :reason => result.first['Notes'] }
+    if !result.empty?
+      { enabled: true, reason: result.first['Notes'] }
     else
-      { :enabled => false, :reason => nil }
+      { enabled: false, reason: nil }
     end
   rescue Faraday::ConnectionFailed => e
     warning "Connection error occurred: #{e}"
