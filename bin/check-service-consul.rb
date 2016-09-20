@@ -92,7 +92,7 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
         'service' => d['ServiceName'],
         'service_id' => d['ServiceID'],
         'notes' => d['Notes']
-      } if d['Status'] == 'failing'
+      } if d['Status'] == 'critical'
     end
 
     if failing.empty? && passing.empty?
