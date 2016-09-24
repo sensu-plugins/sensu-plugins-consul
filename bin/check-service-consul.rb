@@ -64,7 +64,7 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
   # Get the check data for the service from consul
   #
   def acquire_service_data
-    if config[:tags] and config[:service]
+    if config[:tags] && config[:service]
       tags = config[:tags].split(',').to_set
       services = []
       Diplomat::Health.service(config[:service]).each do |s|
@@ -87,7 +87,7 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
   # Main function
   #
   def run
-    if config[:tags] and config[:all]
+    if config[:tags] && config[:all]
       critical 'Cannot specify --tags and --all simultaneously (Consul health/service/ versus health/state/).'
     end
 
