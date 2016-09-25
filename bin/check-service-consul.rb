@@ -46,8 +46,13 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
          long: '--service SERVICE',
          default: 'consul'
 
+  option :tags,
+         description: 'filter services by a comma-separated list of tags (requires --service)',
+         short: '-t TAGS',
+         long: '--tags TAGS'
+
   option :all,
-         description: 'get all services in a non-passing status',
+         description: 'get all services in a non-passing status (not compatible with --tags)',
          short: '-a',
          long: '--all'
 
@@ -59,7 +64,16 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
   # Get the check data for the service from consul
   #
   def acquire_service_data
-    if config[:all]
+    if config[:tags] && config[:service]
+      tags = config[:tags].split(',').to_set
+      services = []
+      Diplomat::Health.service(config[:service]).each do |s|
+        if s['Service']['Tags'].to_set.superset? tags
+          services.push(*s['Checks'])
+        end
+      end
+      return services
+    elsif config[:all]
       Diplomat::Health.state('any')
     else
       Diplomat::Health.checks(config[:service])
@@ -73,6 +87,10 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
   # Main function
   #
   def run
+    if config[:tags] && config[:all]
+      critical 'Cannot specify --tags and --all simultaneously (Consul health/service/ versus health/state/).'
+    end
+
     Diplomat.configure do |dc|
       dc.url = config[:consul]
     end
@@ -99,6 +117,9 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
       msg = 'Could not find checks for any services'
       if config[:service]
         msg = "Could not find checks for service #{config[:service]}"
+        if config[:tags]
+          msg += " with tags #{config[:tags]}"
+        end
       end
       if config[:fail_if_not_found]
         critical msg
