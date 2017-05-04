@@ -47,6 +47,12 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--port PORT',
          default: '8500'
 
+  option :scheme,
+         description: 'consul listener scheme',
+         short: '-S SCHEME',
+         long: '--scheme SCHEME',
+         default: 'http'
+
   def valid_ip(ip)
     case ip.to_s
     when Resolv::IPv4::Regex
@@ -71,7 +77,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
   end
 
   def run
-    r = RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v1/status/leader", timeout: 5).get
+    r = RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/leader", timeout: 5).get
     if r.code == 200
       if valid_ip(strip_ip(r.body))
         ok 'Consul is UP and has a leader'

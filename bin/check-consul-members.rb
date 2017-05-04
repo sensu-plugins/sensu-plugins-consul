@@ -68,8 +68,14 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--wan',
          boolean: false
 
+  option :scheme,
+         description: 'consul listener scheme',
+         short: '-S SCHEME',
+         long: '--scheme SCHEME',
+         default: 'http'
+
   def run
-    url = "http://#{config[:server]}:#{config[:port]}/v1/agent/members"
+    url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members"
     if config[:wan]
       url += '?wan=1'
     end

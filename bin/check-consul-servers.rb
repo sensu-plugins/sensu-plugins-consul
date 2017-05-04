@@ -59,8 +59,14 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--expect EXPECT',
          default: 5
 
+  option :scheme,
+         description: 'consul listener scheme',
+         short: '-S SCHEME',
+         long: '--scheme SCHEME',
+         default: 'http'
+
   def run
-    json = RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v1/status/peers", timeout: 5).get
+    json = RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/peers", timeout: 5).get
     peers = JSON.parse(json).length.to_i
     if peers < config[:min].to_i
       critical "[#{peers}] peers is below critical threshold of [#{config[:min]}]"
