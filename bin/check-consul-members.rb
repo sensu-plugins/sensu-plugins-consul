@@ -74,12 +74,27 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--scheme SCHEME',
          default: 'http'
 
+  option :insecure,
+         description: 'if set, disables SSL verification',
+         short: '-k',
+         long: '--insecure'
+
+  option :capath,
+         description: 'absolute path to an alternate CA file',
+         short: '-c CAPATH',
+         long: '--capath CAPATH'
+
   def run
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members"
+    options = { timeout: 5,
+                verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
+                ssl_ca_file: (config[:capath] if defined? config[:capath]) }
+
     if config[:wan]
       url += '?wan=1'
     end
-    json = RestClient::Resource.new(url, timeout: 5).get
+
+    json = RestClient::Resource.new(url, options).get
     peers = 0
     members = JSON.parse(json)
     members.each do |member|

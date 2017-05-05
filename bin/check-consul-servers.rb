@@ -65,8 +65,23 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--scheme SCHEME',
          default: 'http'
 
+  option :insecure,
+         description: 'if set, disables SSL verification',
+         short: '-k',
+         long: '--insecure'
+
+  option :capath,
+         description: 'path to use for CA validation',
+         short: '-c CAPATH',
+         long: '--capath CAPATH'
+
   def run
-    json = RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/peers", timeout: 5).get
+    url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/peers"
+    options = { timeout: 5,
+                verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
+                ssl_ca_file: (config[:capath] if defined? config[:capath]) }
+
+    json = RestClient::Resource.new(url, options).get
     peers = JSON.parse(json).length.to_i
     if peers < config[:min].to_i
       critical "[#{peers}] peers is below critical threshold of [#{config[:min]}]"
