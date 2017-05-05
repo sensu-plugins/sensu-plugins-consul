@@ -5,6 +5,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 ### Added
+- `check-consul-failures`, `check-consul-leader`, `check-consul-members`, and `check-consul-servers` now accept a --scheme parameter (@akatch)
 - Add consul maintenance check @okushchenko
 
 ## [1.2.0] - 2017-01-26
