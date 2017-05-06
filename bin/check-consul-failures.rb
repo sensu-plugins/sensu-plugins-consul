@@ -37,14 +37,20 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--port PORT',
          default: '8500'
 
+  option :scheme,
+         description: 'consul listener scheme',
+         short: '-S SCHEME',
+         long: '--scheme SCHEME',
+         default: 'http'
+
   def run
-    r = RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v1/agent/members", timeout: 5).get
+    r = RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members", timeout: 5).get
     if r.code == 200
       failing_nodes = JSON.parse(r).find_all { |node| node['Status'] == 4 }
       if !failing_nodes.nil? && !failing_nodes.empty?
         failing_nodes.each_entry do |node|
           puts "Name: #{node['Name']}"
-          RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v1/agent/force-leave/#{node['Name']}", timeout: 5).get
+          RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/force-leave/#{node['Name']}", timeout: 5).get
         end
         ok 'Removed failed consul nodes'
       else
