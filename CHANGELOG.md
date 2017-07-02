@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Added
+- travis testing for ruby 2.4 (@majormoses)
+
 ## [1.3.0] 2017-05-05
 ### Added
 - `check-consul-failures`, `check-consul-leader`, `check-consul-members`, and `check-consul-servers` now accept a --scheme parameter (@akatch)
