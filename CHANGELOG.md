@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [1.4.0] 2017-08-05
+### Added
+- `check-consul-service-health` now accept a `--node` argument that will check all autodiscovered consul services running on the specified node (@psyhomb)
+
 ## [1.3.0] 2017-05-05
 ### Added
 - `check-consul-failures`, `check-consul-leader`, `check-consul-members`, and `check-consul-servers` now accept a --scheme parameter (@akatch)
