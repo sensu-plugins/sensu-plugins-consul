@@ -42,6 +42,11 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
          long: '--consul SERVER',
          default: 'http://localhost:8500'
 
+  option :nodename,
+         description: 'check all consul services running on the specified node',
+         short: '-n NODENAME',
+         long: '--node NODENAME'
+
   option :service,
          description: 'a service managed by consul',
          short: '-s SERVICE',
@@ -74,6 +79,19 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
         end
       end
       return services
+    elsif config[:nodename]
+      data = []
+      begin
+        services = Diplomat::Node.get(config[:nodename]).Services.keys
+      rescue
+        services = []
+      end
+      services.each do |service|
+        Diplomat::Health.checks(service).each do |check|
+          data.push(check) if check.Node == config[:nodename]
+        end
+      end
+      return data
     elsif config[:all]
       Diplomat::Health.state('any')
     else
@@ -94,7 +112,7 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
     found      = false
     warnings   = false
     criticals  = false
-    checks     = {}
+    checks     = []
 
     # Process all of the nonpassing service checks
     acquire_service_data.each do |d|
@@ -105,7 +123,10 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
       # If we are passing do nothing
       next if checkStatus == 'passing'
 
-      checks[checkId] = d['Output']
+      checks.push(
+        checkId => d['Output'],
+        'Status' => checkStatus
+      )
 
       warnings  = true  if %w(warning).include? checkStatus
       criticals = true  if %w(critical unknown).include? checkStatus
