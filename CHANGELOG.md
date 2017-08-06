@@ -1,9 +1,11 @@
-#Change Log
+# Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Added
+- ruby 2.4.1 testing (@majormoses)
 
 ## [1.4.0] 2017-08-05
 ### Added
@@ -81,6 +83,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 - initial release
 
 [Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.3.0...HEAD
+[1.4.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.0...1.3.0
 [1.2.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.0.0...1.1.0
