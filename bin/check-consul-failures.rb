@@ -43,18 +43,38 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--scheme SCHEME',
          default: 'http'
 
+  option :keep_failures,
+         description: 'do not remove failing nodes',
+         short: '-k',
+         long: '--keep-failures',
+         boolean: true,
+         default: false
+
+  option :critical,
+         description: 'set state to critical',
+         short: '-c',
+         long: '--critical',
+         boolean: true,
+         default: false
+
   def run
     r = RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members", timeout: 5).get
     if r.code == 200
       failing_nodes = JSON.parse(r).find_all { |node| node['Status'] == 4 }
       if !failing_nodes.nil? && !failing_nodes.empty?
+        nodes_names = []
         failing_nodes.each_entry do |node|
-          puts "Name: #{node['Name']}"
+          nodes_names.push(node['Name'])
+          next if config[:keep_failures]
+          puts "Removing failed node: #{node['Name']}"
           RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/force-leave/#{node['Name']}", timeout: 5).get
+          nodes_names.delete(node['Name'])
         end
-        ok 'Removed failed consul nodes'
+        ok 'All clear' if nodes_names.empty?
+        critical "Found failed nodes: #{nodes_names}" if config[:critical]
+        warning "Found failed nodes: #{nodes_names}"
       else
-        ok 'No consul nodes to remove'
+        ok 'All nodes are alive'
       end
     else
       critical 'Consul is not responding'

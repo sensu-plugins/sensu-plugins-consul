@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Added
+- `check-consul-failures` now accepts `--keep-failures` and `--critical` arguments (@psyhomb)
+
 ### Fixed
 - Bug fix for `check-consul-service-health` [#26](https://github.com/sensu-plugins/sensu-plugins-consul/pull/26) (@psyhomb)
 
