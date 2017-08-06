@@ -82,12 +82,12 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
     elsif config[:nodename]
       data = []
       begin
-        services = Diplomat::Node.get(config[:nodename]).Services.keys
+        services = Diplomat::Node.get(config[:nodename]).Services
       rescue
-        services = []
+        services = {}
       end
-      services.each do |service|
-        Diplomat::Health.checks(service).each do |check|
+      services.values.each do |service|
+        Diplomat::Health.checks(service['Service']).each do |check|
           data.push(check) if check.Node == config[:nodename]
         end
       end
