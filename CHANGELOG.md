@@ -10,6 +10,12 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 - Bug fix for `check-consul-service-health` [#26](https://github.com/sensu-plugins/sensu-plugins-consul/pull/26) (@psyhomb)
 
 ### Added
+- `check-consul-failures` now accepts `--keep-failures` and `--critical` arguments (@psyhomb)
+
+### Fixed
+- Bug fix for `check-consul-service-health` [#26](https://github.com/sensu-plugins/sensu-plugins-consul/pull/26) (@psyhomb)
+
+### Added
 - ruby 2.4.1 testing (@majormoses)
 
 ## [1.4.0] 2017-08-05
