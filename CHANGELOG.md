@@ -5,13 +5,11 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 
-## [1.4.1] 2017-08-06
-### Fixed
-- Bug fix for `check-consul-service-health` [#26](https://github.com/sensu-plugins/sensu-plugins-consul/pull/26) (@psyhomb)
-
+## [1.5.0] - 2017-08-09
 ### Added
 - `check-consul-failures` now accepts `--keep-failures` and `--critical` arguments (@psyhomb)
 
+## [1.4.1] 2017-08-06
 ### Fixed
 - Bug fix for `check-consul-service-health` [#26](https://github.com/sensu-plugins/sensu-plugins-consul/pull/26) (@psyhomb)
 
@@ -93,7 +91,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.1...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.5.0...HEAD
+[1.5.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.1...1.5.0
 [1.4.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.0...1.4.1
 [1.4.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.0...1.3.0
