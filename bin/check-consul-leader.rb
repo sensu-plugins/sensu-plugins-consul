@@ -59,7 +59,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--insecure'
 
   option :capath,
-         description: 'if set, disables SSL verification',
+         description: 'absolute path to an alternative CA file',
          short: '-c CAPATH',
          long: '--capath CAPATH'
 

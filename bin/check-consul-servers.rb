@@ -71,7 +71,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--insecure'
 
   option :capath,
-         description: 'path to use for CA validation',
+         description: 'absolute path to an alternate CA file',
          short: '-c CAPATH',
          long: '--capath CAPATH'
 
