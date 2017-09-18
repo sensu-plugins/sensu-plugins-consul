@@ -1,9 +1,25 @@
-#Change Log
+# Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [1.5.0] - 2017-08-09
+### Added
+- `check-consul-failures` now accepts `--keep-failures` and `--critical` arguments (@psyhomb)
+
+## [1.4.1] 2017-08-06
+### Fixed
+- Bug fix for `check-consul-service-health` [#26](https://github.com/sensu-plugins/sensu-plugins-consul/pull/26) (@psyhomb)
+
+### Added
+- ruby 2.4.1 testing (@majormoses)
+
+## [1.4.0] 2017-08-05
+### Added
+- `check-consul-service-health` now accept a `--node` argument that will check all autodiscovered consul services running on the specified node (@psyhomb)
+
 ## [1.3.0] 2017-05-05
 ### Added
 - `check-consul-failures`, `check-consul-leader`, `check-consul-members`, and `check-consul-servers` now accept a --scheme parameter (@akatch)
@@ -75,7 +91,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.3.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.5.0...HEAD
+[1.5.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.1...1.5.0
+[1.4.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.0...1.4.1
+[1.4.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.0...1.3.0
 [1.2.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.0.0...1.1.0
