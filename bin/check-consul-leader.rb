@@ -66,9 +66,9 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--capath CAPATH'
 
   option :timeout,
-         description: 'connection will time out after this many seconds'
-         short: '-t TIMEOUT_IN_SECONDS'
-         long: '--timeout TIMEOUT_IN_SECONDS'
+         description: 'connection will time out after this many seconds',
+         short: '-t TIMEOUT_IN_SECONDS',
+         long: '--timeout TIMEOUT_IN_SECONDS',
          default: 5
 
   def valid_ip(ip)
@@ -95,7 +95,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
   end
 
   def run
-    options = { timeout: (config[:timeout]),
+    options = { timeout: config[:timeout],
                 verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
                 ssl_ca_file: (config[:capath] if defined? config[:capath]) }
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/leader"
