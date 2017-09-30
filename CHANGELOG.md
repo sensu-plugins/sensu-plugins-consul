@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Added
+- `check-consul-leader`, `check-consul-members`, and `check-consul-servers` now accept `--insecure` and `--capath` arguments (@akatch)
 
 ## [1.5.0] - 2017-08-09
 ### Added

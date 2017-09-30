@@ -53,6 +53,24 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--scheme SCHEME',
          default: 'http'
 
+  option :insecure,
+         description: 'set this flag to disable SSL verification',
+         short: '-k',
+         long: '--insecure',
+         boolean: true,
+         default: false
+
+  option :capath,
+         description: 'absolute path to an alternative CA file',
+         short: '-c CAPATH',
+         long: '--capath CAPATH'
+
+  option :timeout,
+         description: 'connection will time out after this many seconds',
+         short: '-t TIMEOUT_IN_SECONDS',
+         long: '--timeout TIMEOUT_IN_SECONDS',
+         default: 5
+
   def valid_ip(ip)
     case ip.to_s
     when Resolv::IPv4::Regex
@@ -77,7 +95,13 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
   end
 
   def run
-    r = RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/leader", timeout: 5).get
+    options = { timeout: config[:timeout],
+                verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
+                ssl_ca_file: (config[:capath] if defined? config[:capath]) }
+    url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/leader"
+
+    r = RestClient::Resource.new(url, options).get
+
     if r.code == 200
       if valid_ip(strip_ip(r.body))
         ok 'Consul is UP and has a leader'

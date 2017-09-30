@@ -74,12 +74,35 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--scheme SCHEME',
          default: 'http'
 
+  option :insecure,
+         description: 'if set, disables SSL verification',
+         short: '-k',
+         long: '--insecure',
+         boolean: true,
+         default: false
+
+  option :capath,
+         description: 'absolute path to an alternate CA file',
+         short: '-c CAPATH',
+         long: '--capath CAPATH'
+
+  option :timeout,
+         description: 'connection will time out after this many seconds',
+         short: '-t TIMEOUT_IN_SECONDS',
+         long: '--timeout TIMEOUT_IN_SECONDS',
+         default: 5
+
   def run
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members"
+    options = { timeout: config[:timeout],
+                verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
+                ssl_ca_file: (config[:capath] if defined? config[:capath]) }
+
     if config[:wan]
       url += '?wan=1'
     end
-    json = RestClient::Resource.new(url, timeout: 5).get
+
+    json = RestClient::Resource.new(url, options).get
     peers = 0
     members = JSON.parse(json)
     members.each do |member|
