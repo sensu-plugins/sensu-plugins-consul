@@ -1,11 +1,16 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
+This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md)
 
 ## [Unreleased]
+
+## [1.6.0] - 2017-09-30
 ### Added
-- `check-consul-leader`, `check-consul-members`, and `check-consul-servers` now accept `--insecure` and `--capath` arguments (@akatch)
+- `check-consul-leader`, `check-consul-members`, and `check-consul-servers` now accept `--insecure`, `--capath`, `--timeout` arguments (@akatch)
+
+### Changed
+- update Changelog guideline location (@majormoses)
 
 ## [1.5.0] - 2017-08-09
 ### Added
@@ -93,7 +98,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.5.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.6.0...HEAD
+[1.6.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.5.0...1.6.0
 [1.5.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.1...1.5.0
 [1.4.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.0...1.4.1
 [1.4.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.3.0...1.4.0
