@@ -92,10 +92,16 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--timeout TIMEOUT_IN_SECONDS',
          default: 5
 
+  option :token,
+         description: 'set X-Consul-Token header http token',
+         short: '-T',
+         long: '--token CONSUL_TOKEN'
+
   def run
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members"
     options = { timeout: config[:timeout],
                 verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
+                headers: ({ 'X-Consul-Token': config[:token] } if defined? config[:token]),
                 ssl_ca_file: (config[:capath] if defined? config[:capath]) }
 
     if config[:wan]
