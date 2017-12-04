@@ -101,7 +101,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members"
     options = { timeout: config[:timeout],
                 verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
-                headers: ({ 'X-Consul-Token': config[:token] } if defined? config[:token]),
+                headers: ({ 'X-Consul-Token' => config[:token] } if defined? config[:token]),
                 ssl_ca_file: (config[:capath] if defined? config[:capath]) }
 
     if config[:wan]
