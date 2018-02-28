@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
+
 #
 #   check-service-consul
 #
@@ -99,18 +101,21 @@ class ServiceStatus < Sensu::Plugin::Check::CLI
     passing = []
     failing = []
     data.each do |d|
-      passing << {
-        'node' => d['Node'],
-        'service' => d['ServiceName'],
-        'service_id' => d['ServiceID'],
-        'notes' => d['Notes']
-      } if d['Status'] == 'passing'
-      failing << {
-        'node' => d['Node'],
-        'service' => d['ServiceName'],
-        'service_id' => d['ServiceID'],
-        'notes' => d['Notes']
-      } if d['Status'] == 'critical'
+      if d['Status'] == 'passing'
+        passing << {
+          'node' => d['Node'],
+          'service' => d['ServiceName'],
+          'service_id' => d['ServiceID'],
+          'notes' => d['Notes']
+        }
+      elsif d['Status'] == 'critical'
+        failing << {
+          'node' => d['Node'],
+          'service' => d['ServiceName'],
+          'service_id' => d['ServiceID'],
+          'notes' => d['Notes']
+        }
+      end
     end
 
     if failing.empty? && passing.empty?

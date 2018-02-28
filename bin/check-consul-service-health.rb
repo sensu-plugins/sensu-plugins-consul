@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
+
 #
 #   check-consul-service-health
 #
@@ -78,20 +80,20 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
           services.push(*s['Checks'])
         end
       end
-      return services
+      services
     elsif config[:nodename]
       data = []
       begin
         services = Diplomat::Node.get(config[:nodename]).Services
-      rescue
+      rescue StandardError
         services = {}
       end
-      services.values.each do |service|
+      services.each_value do |service|
         Diplomat::Health.checks(service['Service']).each do |check|
           data.push(check) if check.Node == config[:nodename]
         end
       end
-      return data
+      data
     elsif config[:all]
       Diplomat::Health.state('any')
     else
@@ -128,8 +130,8 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
         'Status' => checkStatus
       )
 
-      warnings  = true  if %w(warning).include? checkStatus
-      criticals = true  if %w(critical unknown).include? checkStatus
+      warnings  = true  if %w[warning].include? checkStatus
+      criticals = true  if %w[critical unknown].include? checkStatus
     end
 
     if config[:fail_if_not_found] && !found

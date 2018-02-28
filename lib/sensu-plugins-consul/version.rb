@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SensuPluginsConsul
   module Version
     MAJOR = 1

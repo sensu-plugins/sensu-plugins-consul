@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
+
 #
 #   check-consul-kv-ttl
 #
@@ -126,8 +128,8 @@ class CheckConsulKvTTL < Sensu::Plugin::Check::CLI
           kv_status = kv_status.downcase
 
           # Flag based off of status
-          warning 'Warning status detected!'    if %w(warning).include? kv_status
-          critical 'Critical status detected!'  if %w(critical unknown).include? kv_status
+          warning 'Warning status detected!'    if %w[warning].include? kv_status
+          critical 'Critical status detected!'  if %w[critical unknown].include? kv_status
         end
 
         # Dig to the time
@@ -157,7 +159,7 @@ class CheckConsulKvTTL < Sensu::Plugin::Check::CLI
       critical "TTL Expired! Elapsed Time: #{elapsed_seconds}"                if elapsed_seconds > config[:critical]
       warning  "TTL Expiration Approaching! Elapsed Time: #{elapsed_seconds}" if elapsed_seconds > config[:warning]
       ok
-    rescue
+    rescue StandardError
       critical 'Unable to process DateTime objects!'
     end
   end

@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
+
 #
 #   check-consul-leader
 #
@@ -74,11 +76,11 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
   def valid_ip(ip)
     case ip.to_s
     when Resolv::IPv4::Regex
-      return true
+      true
     when Resolv::IPv6::Regex
-      return true
+      true
     else
-      return false
+      false
     end
   end
 
