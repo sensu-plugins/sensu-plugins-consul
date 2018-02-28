@@ -51,12 +51,14 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          description: 'minimum number of peers',
          short: '-g GREATER THAN',
          long: '--greater GREATER THAN',
+         proc: proc(&:to_i),
          default: 3
 
   option :expected,
          description: 'expected number of peers',
          short: '-e EXPECT',
          long: '--expect EXPECT',
+         proc: proc(&:to_i),
          default: 5
 
   option :scheme,
@@ -81,6 +83,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          description: 'connection will time out after this many seconds',
          short: '-t TIMEOUT_IN_SECONDS',
          long: '--timeout TIMEOUT_IN_SECONDS',
+         proc: proc(&:to_i),
          default: 5
 
   def run
@@ -91,9 +94,9 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
 
     json = RestClient::Resource.new(url, options).get
     peers = JSON.parse(json).length.to_i
-    if peers < config[:min].to_i
+    if peers < config[:min]
       critical "[#{peers}] peers is below critical threshold of [#{config[:min]}]"
-    elsif peers != config[:expected].to_i
+    elsif peers != config[:expected]
       warning "[#{peers}] peers is outside of expected count of [#{config[:expected]}]"
     else
       ok 'Peers within threshold'
