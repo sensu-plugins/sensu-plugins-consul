@@ -4,8 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md)
 
 ## [Unreleased]
+
+## [1.6.1] - 2018-03-02
 ### Fixed
-- Bug fix for `check-consul-servers` so timeout option works
+- Bug fix for `check-consul-servers` so timeout option works (@joshbenner)
 
 ## [1.6.0] - 2017-09-30
 ### Added
@@ -100,7 +102,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.6.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.6.1...HEAD
+[1.6.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.6.0...1.6.1
 [1.6.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.5.0...1.6.0
 [1.5.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.1...1.5.0
 [1.4.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.4.0...1.4.1
