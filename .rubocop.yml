@@ -28,3 +28,7 @@ RegexpLiteral:
 
 Style/Documentation:
   Enabled: false
+
+# .match?() only exists in ruby 2.4+
+Performance/RegexpMatch:
+  Enabled: false
