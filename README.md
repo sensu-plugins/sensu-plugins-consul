@@ -17,6 +17,8 @@
  * bin/check-consul-members.rb
  * bin/check-service-consul.rb
  * bin/check-consul-maintenance.rb
+ * bin/check-consul-quorum.rb
+ * bin/check-consul-stale-peers.rb
 
 ## Usage
 
