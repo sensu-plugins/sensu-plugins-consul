@@ -88,10 +88,16 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          proc: proc(&:to_i),
          default: 5
 
+  option :token,
+         description: 'set X-Consul-Token header http token',
+         short: '-T',
+         long: '--token CONSUL_TOKEN'
+
   def run
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/peers"
     options = { timeout: config[:timeout],
                 verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
+                headers: ({ 'X-Consul-Token' => config[:token] } if defined? config[:token]),
                 ssl_ca_file: (config[:capath] if defined? config[:capath]) }
 
     json = RestClient::Resource.new(url, options).get
