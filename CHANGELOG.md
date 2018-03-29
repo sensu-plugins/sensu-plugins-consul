@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md)
 
 ## [Unreleased]
+
+## [2.1.0] - 2018-03-29
 ### Added
 - `check-consul-quorum.rb`: Check how many servers can be lost while maintaining quorum (@roboticcheese)
 - `check-consul-stale-peers.rb`: Check for stale peers in the raft configuration (@roboticcheese)
@@ -122,7 +124,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.0.1...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.0.1...2.1.0
 [2.0.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.6.1...2.0.0
 [1.6.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/1.6.0...1.6.1
