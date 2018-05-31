@@ -47,6 +47,10 @@ class MaintenanceStatus < Sensu::Plugin::Check::CLI
          long: '--node NODE',
          default: 'localhost'
 
+  option :token,
+         description: 'ACL token',
+         long: '--token ACL_TOKEN'
+
   # Get the maintenance data for the node from consul
   #
   def acquire_maintenance_data
@@ -60,8 +64,14 @@ class MaintenanceStatus < Sensu::Plugin::Check::CLI
     end
   rescue Faraday::ConnectionFailed => e
     warning "Connection error occurred: #{e}"
+  rescue Faraday::ClientError => e
+    if e.response[:status] == 403
+      critical %(ACL token is not authorized to access resource: #{e.response[:body]})
+    else
+      unknown "Exception occurred when checking consul service: #{e}"
+    end
   rescue StandardError => e
-    unknown "Exception occurred when checking consul node maintenace: #{e}"
+    unknown "Exception occurred when checking consul node maintenance: #{e}"
   end
 
   # Main function
@@ -69,6 +79,12 @@ class MaintenanceStatus < Sensu::Plugin::Check::CLI
   def run
     Diplomat.configure do |dc|
       dc.url = config[:consul]
+      dc.acl_token = config[:token]
+      dc.options = {
+        headers: {
+          'X-Consul-Token' => config[:token]
+        }
+      }
     end
 
     data = acquire_maintenance_data

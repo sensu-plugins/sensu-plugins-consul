@@ -70,6 +70,10 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
          short: '-f',
          long: '--fail-if-not-found'
 
+  option :token,
+         description: 'ACL token',
+         long: '--token ACL_TOKEN'
+
   # Get the service checks for the given service
   def acquire_service_data
     if config[:tags] && config[:service]
@@ -109,6 +113,12 @@ class CheckConsulServiceHealth < Sensu::Plugin::Check::CLI
 
     Diplomat.configure do |dc|
       dc.url = config[:consul]
+      dc.acl_token = config[:token]
+      dc.options = {
+        headers: {
+          'X-Consul-Token' => config[:token]
+        }
+      }
     end
 
     found      = false

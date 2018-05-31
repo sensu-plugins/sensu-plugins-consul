@@ -73,6 +73,10 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          long: '--timeout TIMEOUT_IN_SECONDS',
          default: 5
 
+  option :token,
+         description: 'ACL token',
+         long: '--token ACL_TOKEN'
+
   def valid_ip(ip)
     case ip.to_s
     when Resolv::IPv4::Regex
@@ -99,7 +103,8 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
   def run
     options = { timeout: config[:timeout],
                 verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
-                ssl_ca_file: (config[:capath] if defined? config[:capath]) }
+                ssl_ca_file: (config[:capath] if defined? config[:capath]),
+                headers: { 'X-Consul-Token' => config[:token] } }
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/leader"
 
     r = RestClient::Resource.new(url, options).get
