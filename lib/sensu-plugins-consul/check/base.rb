@@ -80,6 +80,10 @@ module SensuPluginsConsul
              proc: proc(&:to_i),
              default: 5
 
+      option :token,
+             description: 'ACL token',
+             long: '--token ACL_TOKEN',
+
       #
       # Fetch and return the parsed JSON data from a specified Consul API endpoint.
       #
@@ -88,7 +92,9 @@ module SensuPluginsConsul
               "v1/#{endpoint}"
         options = { timeout: config[:timeout],
                     verify_ssl: !config[:insecure],
-                    ssl_ca_file: config[:capath] }
+                    ssl_ca_file: config[:capath],
+                    headers: { 'X-Consul-Token' => config[:token] }
+                  }
 
         JSON.parse(RestClient::Resource.new(url, options).get)
       rescue Errno::ECONNREFUSED

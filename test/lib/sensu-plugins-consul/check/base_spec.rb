@@ -55,7 +55,9 @@ describe SensuPluginsConsul::Check::Base do
           .with('https://1.2.3.4:4443/v1/things',
                 timeout: 5,
                 verify_ssl: false,
-                ssl_ca_file: '/etc/ca')
+                ssl_ca_file: '/etc/ca',
+                headers: { 'X-Consul-Token' => 'foo' }
+               )
           .and_return(double(get: '{"some":"json"}'))
       end
 
