@@ -97,7 +97,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
   end
 
   def run
-    options = { timeout: config[:timeout],
+    options = { timeout: config[:timeout].to_i,
                 verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
                 ssl_ca_file: (config[:capath] if defined? config[:capath]) }
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/leader"
