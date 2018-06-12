@@ -60,7 +60,6 @@ class CheckConsulKvTTL < Sensu::Plugin::Check::CLI
          description: 'kv namespace to pull data from',
          short: '-k NAMESPACE',
          long: '--kv NAMESPACE',
-         default: nil,
          required: true
 
   option :json,
@@ -95,17 +94,28 @@ class CheckConsulKvTTL < Sensu::Plugin::Check::CLI
          proc: proc { |a| a.to_i },
          default: 60
 
+  option :token,
+         description: 'ACL token',
+         long: '--token ACL_TOKEN'
+
   # Do work
   def run
     Diplomat.configure do |dip|
       dip.url = config[:consul]
+      dip.acl_token = config[:token]
     end
 
     begin
       # Retrieve the kv
       data = Diplomat::Kv.get(config[:kv])
-    rescue Faraday::ResourceNotFound
-      critical "Key/Value(#{config[:kv]}) pair does not exist in Consul."
+    rescue Faraday::ResourceNotFound, Diplomat::KeyNotFound
+      critical %(Key/value pair "#{config[:kv]}" does not exist in Consul.)
+    rescue Diplomat::UnknownStatus => e
+      if e.message.include?('403')
+        critical %(ACL token is not authorized to access "#{config[:kv]}")
+      else
+        critical "Unhandled exception(#{e.class}) -- #{e.message}"
+      end
     rescue Exception => e # rubocop:disable Lint/RescueException
       critical "Unhandled exception(#{e.class}) -- #{e.message}"
     end

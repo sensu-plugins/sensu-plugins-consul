@@ -38,7 +38,8 @@ describe SensuPluginsConsul::Check::Base do
           .with('http://127.0.0.1:8500/v1/things',
                 timeout: 5,
                 verify_ssl: true,
-                ssl_ca_file: nil)
+                ssl_ca_file: nil,
+                headers: { 'X-Consul-Token' => nil })
           .and_return(double(get: '{"some":"json"}'))
       end
 
@@ -55,7 +56,8 @@ describe SensuPluginsConsul::Check::Base do
           .with('https://1.2.3.4:4443/v1/things',
                 timeout: 5,
                 verify_ssl: false,
-                ssl_ca_file: '/etc/ca')
+                ssl_ca_file: '/etc/ca',
+                headers: { 'X-Consul-Token' => nil })
           .and_return(double(get: '{"some":"json"}'))
       end
 

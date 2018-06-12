@@ -88,11 +88,16 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          proc: proc(&:to_i),
          default: 5
 
+  option :token,
+         description: 'ACL token',
+         long: '--token ACL_TOKEN'
+
   def run
     url = "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/status/peers"
     options = { timeout: config[:timeout],
                 verify_ssl: (OpenSSL::SSL::VERIFY_NONE if defined? config[:insecure]),
-                ssl_ca_file: (config[:capath] if defined? config[:capath]) }
+                ssl_ca_file: (config[:capath] if defined? config[:capath]),
+                headers: { 'X-Consul-Token' => config[:token] } }
 
     json = RestClient::Resource.new(url, options).get
     peers = JSON.parse(json).length.to_i

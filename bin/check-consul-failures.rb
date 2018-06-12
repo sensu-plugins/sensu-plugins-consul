@@ -59,8 +59,16 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          boolean: true,
          default: false
 
+  option :token,
+         description: 'ACL token',
+         long: '--token ACL_TOKEN'
+
   def run
-    r = RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members", timeout: 5).get
+    r = RestClient::Resource.new(
+      "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members",
+      timeout: 5,
+      headers: { 'X-Consul-Token' => config[:token] }
+    ).get
     if r.code == 200
       failing_nodes = JSON.parse(r).find_all { |node| node['Status'] == 4 }
       if !failing_nodes.nil? && !failing_nodes.empty?
@@ -69,7 +77,11 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
           nodes_names.push(node['Name'])
           next if config[:keep_failures]
           puts "Removing failed node: #{node['Name']}"
-          RestClient::Resource.new("#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/force-leave/#{node['Name']}", timeout: 5).get
+          RestClient::Resource.new(
+            "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/force-leave/#{node['Name']}",
+            timeout: 5,
+            headers: { 'X-Consul-Token' => config[:token] }
+          ).get
           nodes_names.delete(node['Name'])
         end
         ok 'All clear' if nodes_names.empty?
