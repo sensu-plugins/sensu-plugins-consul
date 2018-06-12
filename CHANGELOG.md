@@ -7,7 +7,7 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [2.2.0] - 2018-06-11
 ### Added
-- add ACL support to all consul checks except `check-consul-quorum.rb` (@scalp42)
+- add ACL support to all consul checks (@scalp42)
 
 ## [2.1.1] - 2018-05-31
 ### Fixed
