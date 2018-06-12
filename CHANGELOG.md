@@ -4,8 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md)
 
 ## [Unreleased]
+
+## [2.2.0] - 2018-06-11
 ### Added
-- add ACL support (@scalp42)
+- add ACL support to all consul checks except `check-consul-quorum.rb` (@scalp42)
 
 ## [2.1.1] - 2018-05-31
 ### Fixed
@@ -130,7 +132,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.1...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.2.0...HEAD
+[2.2.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.0.1...2.1.0
 [2.0.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.0.0...2.0.1
