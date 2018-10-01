@@ -81,7 +81,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
             "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/force-leave/#{node['Name']}",
             timeout: 5,
             headers: { 'X-Consul-Token' => config[:token] }
-          ).get
+          ).put
           nodes_names.delete(node['Name'])
         end
         ok 'All clear' if nodes_names.empty?
