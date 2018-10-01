@@ -5,6 +5,7 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [2.2.1] - 2018-10-01
 ### Fixed
 - check-consul-failures: use a put when requesting to remove a node from the agent api (@majormoses)
 
@@ -135,7 +136,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.2.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.2.1...HEAD
+[2.2.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.2.0...2.2.1
 [2.2.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/sensu-plugins/sensu-plugins-consul/compare/2.0.1...2.1.0
