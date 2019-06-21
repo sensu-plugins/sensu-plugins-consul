@@ -1,11 +1,11 @@
 language: ruby
+services:
+- docker
 cache:
 - bundler
 install:
 - bundle install
 rvm:
-- 2.1
-- 2.2
 - 2.3.0
 - 2.4.1
 notifications:
@@ -18,8 +18,10 @@ script:
 - bundle exec rake default
 - gem build sensu-plugins-consul.gemspec
 - gem install sensu-plugins-consul-*.gem
+before_deploy:
+- bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git bonsai || echo 'bonsai/ exists, skipping git clone'"
 deploy:
-  provider: rubygems
+- provider: rubygems
   api_key:
     secure: AmpE9B6tIFXk2H3yMzZJQzVPVrkLpzIX0b1eUABw2iR2NMR90PncATLPeKYcYvpqtUCGW1YoWKkb1kzTwazi0XnVEV2TWydCMPhp/UU90lGxv8SsSYr+L2FUCrXu8mWs46xuXsvqGn1yKVaF0pZFbrMQ3yVLcD5dsqfNIX/ubw8=
   gem: sensu-plugins-consul
@@ -28,3 +30,10 @@ deploy:
     all_branches: true
     rvm: 2.4.1
     repo: sensu-plugins/sensu-plugins-consul
+- provider: script
+  script: bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-consul
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    rvm: 2.4.1
