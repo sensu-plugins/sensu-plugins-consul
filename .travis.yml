@@ -21,7 +21,7 @@ before_deploy:
 deploy:
 - provider: rubygems
   api_key:
-    secure: AmpE9B6tIFXk2H3yMzZJQzVPVrkLpzIX0b1eUABw2iR2NMR90PncATLPeKYcYvpqtUCGW1YoWKkb1kzTwazi0XnVEV2TWydCMPhp/UU90lGxv8SsSYr+L2FUCrXu8mWs46xuXsvqGn1yKVaF0pZFbrMQ3yVLcD5dsqfNIX/ubw8=
+         secure: AmpE9B6tIFXk2H3yMzZJQzVPVrkLpzIX0b1eUABw2iR2NMR90PncATLPeKYcYvpqtUCGW1YoWKkb1kzTwazi0XnVEV2TWydCMPhp/UU90lGxv8SsSYr+L2FUCrXu8mWs46xuXsvqGn1yKVaF0pZFbrMQ3yVLcD5dsqfNIX/ubw8=
   gem: sensu-plugins-consul
   on:
     tags: true
