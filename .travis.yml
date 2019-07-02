@@ -19,7 +19,7 @@ script:
 - gem build sensu-plugins-consul.gemspec
 - gem install sensu-plugins-consul-*.gem
 before_deploy:
-  - bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git bonsai || echo 'bonsai/ exists, skipping git clone'"
+- bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git bonsai || echo 'bonsai/ exists, skipping git clone'"
 deploy:
 - provider: rubygems
   api_key:
@@ -31,9 +31,9 @@ deploy:
     rvm: 2.4.1
     repo: sreejita-biswas/sensu-plugins-consul
 - provider: script
-    script: bonsai/ruby-runtime/travis-build-bonsai-assets.sh sensu-plugins-consul
-    skip_cleanup: true
-    on:
-      tags: true
-      all_branches: true
-      rvm: 2.4.1
+  script: bonsai/ruby-runtime/travis-build-bonsai-assets.sh sensu-plugins-consul
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    rvm: 2.4.1
