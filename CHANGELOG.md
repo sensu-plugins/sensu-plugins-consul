@@ -5,6 +5,14 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [2.2.3] - 2019-11-16
+### Fixed
+- Fix unknown cipher error discussed here: https://github.com/rest-client/rest-client/issues/612
+
+## [2.2.2] - 2019-11-16
+### Added
+- Configuration for Sensu GO Bonsai asset creation
+
 ## [2.2.1] - 2018-10-01
 ### Fixed
 - check-consul-failures: use a put when requesting to remove a node from the agent api (@majormoses)
