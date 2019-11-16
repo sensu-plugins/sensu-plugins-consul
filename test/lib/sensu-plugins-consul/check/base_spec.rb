@@ -98,7 +98,7 @@ describe SensuPluginsConsul::Check::Base do
 
       it 'returns a critical' do
         res = check.consul_get('/things')
-        expect(res).to eq('UNKNOWN: Consul returned: RestClient::Exception: ')
+        expect(res).to eq('UNKNOWN: Consul returned: RestClient::Exception')
       end
     end
   end

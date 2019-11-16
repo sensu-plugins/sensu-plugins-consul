@@ -14,6 +14,8 @@ notifications:
     - sensu-plugin@sensu-plugins.io
     on_success: change
     on_failure: always
+before_deploy:
+- git clone https://github.com/sensu/sensu-go-bonsai-asset.git --branch feature/ruby-plugin-assets bonsai
 script:
 - bundle exec rake default
 - gem build sensu-plugins-consul.gemspec
@@ -28,3 +30,10 @@ deploy:
     all_branches: true
     rvm: 2.4.1
     repo: sensu-plugins/sensu-plugins-consul
+  provider: script
+  script: bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-consul
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    rvm: 2.4.1
