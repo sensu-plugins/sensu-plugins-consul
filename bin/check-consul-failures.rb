@@ -67,7 +67,8 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          description: 'consul timeout',
          short: '-t TIMEOUT_IN_SECONDS',
          long: '--timeout TIMEOUT_IN_SECONDS',
-         default: '5'
+         proc: proc(&:to_i),
+         default: 5
 
   def run
     r = RestClient::Resource.new(
