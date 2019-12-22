@@ -63,10 +63,16 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          description: 'ACL token',
          long: '--token ACL_TOKEN'
 
+  option :timeout,
+         description: 'consul timeout',
+         short: '-t TIMEOUT_IN_SECONDS',
+         long: '--timeout TIMEOUT_IN_SECONDS',
+         default: '5'
+
   def run
     r = RestClient::Resource.new(
       "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/members",
-      timeout: 5,
+      timeout: config[:timeout],
       headers: { 'X-Consul-Token' => config[:token] }
     ).get
     if r.code == 200
@@ -79,7 +85,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
           puts "Removing failed node: #{node['Name']}"
           RestClient::Resource.new(
             "#{config[:scheme]}://#{config[:server]}:#{config[:port]}/v1/agent/force-leave/#{node['Name']}",
-            timeout: 5,
+            timeout: config[:timeout],
             headers: { 'X-Consul-Token' => config[:token] }
           ).put
           nodes_names.delete(node['Name'])
