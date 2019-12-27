@@ -92,6 +92,7 @@ class ConsulStatus < Sensu::Plugin::Check::CLI
          description: 'connection will time out after this many seconds',
          short: '-t TIMEOUT_IN_SECONDS',
          long: '--timeout TIMEOUT_IN_SECONDS',
+         proc: proc(&:to_i),
          default: 5
 
   option :token,
