@@ -1,23 +1,23 @@
 language: ruby
 cache:
-- bundler
+  - bundler
+before_install:
+  - gem install bundler -v 2.1
 install:
-- bundle install
+  - bundle install
 rvm:
-- 2.1
-- 2.2
-- 2.3.0
-- 2.4.1
+  - 2.3.0
+  - 2.4.1
 notifications:
   email:
     recipients:
-    - sensu-plugin@sensu-plugins.io
+      - sensu-plugin@sensu-plugins.io
     on_success: change
     on_failure: always
 script:
-- bundle exec rake default
-- gem build sensu-plugins-consul.gemspec
-- gem install sensu-plugins-consul-*.gem
+  - bundle exec rake default
+  - gem build sensu-plugins-consul.gemspec
+  - gem install sensu-plugins-consul-*.gem
 deploy:
   provider: rubygems
   api_key:
