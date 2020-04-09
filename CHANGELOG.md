@@ -7,7 +7,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [3.0.0]- 2020-04-09
 ### Breaking Changes
-- bumped `sensu-plugin` dependency from `~> 1.x` to `~> 4.0` please consult the changelog for additional details. The notable breaking change [is](https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#v145---2017-03-07)
+- bumped `sensu-plugin` dependency from `~> 1.x` to `~> 4.0` please consult the changelog for additional details. The notable breaking change [is](https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#v145---2017-03-07) (@majormoses)
+- require ruby `> 2.3` (@majormoses)
 
 ## [2.2.1] - 2018-10-01
 ### Fixed
