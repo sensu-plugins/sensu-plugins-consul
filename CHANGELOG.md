@@ -13,6 +13,7 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ## [2.2.1] - 2018-10-01
 ### Fixed
 - check-consul-failures: use a put when requesting to remove a node from the agent api (@majormoses)
+- check-consul-members: convert timeout to an integer (@rstruber)
 
 ## [2.2.0] - 2018-06-11
 ### Added
