@@ -33,7 +33,7 @@ Gem::Specification.new do |s| # rubocop:disable Metrics/BlockLength
 
   s.add_runtime_dependency 'sensu-plugin', '~> 4.0'
 
-  s.add_runtime_dependency 'diplomat',     '0.14.0'
+  s.add_runtime_dependency 'diplomat',     '2.4.2'
   s.add_runtime_dependency 'rest-client',  '1.8.0'
 
   s.add_development_dependency 'bundler',                   '~> 2.1'
