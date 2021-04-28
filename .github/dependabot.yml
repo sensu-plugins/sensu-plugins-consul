@@ -1,0 +1,10 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: daily
+  ignore:
+  - dependency-name: diplomat
+    versions:
+    - 2.4.3
